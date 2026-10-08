@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 
 <head>
   <meta charset="UTF-8">
@@ -10,12 +10,16 @@
 <body>
   <header>
     <nav>
-      <a href="index.html">AegisOps</a> &nbsp;
-      <a href="signup.html">signup</a> &nbsp;
-      <a href="login.html">login</a> &nbsp;
+      <a href="/">AegisOps</a> &nbsp;
+      <a href="signup">signup</a> &nbsp;
+      <a href="login">login</a> &nbsp;
     </nav>
   </header>
   <section>
+      <div>
+          <p th:if="${success}" th:text="${success}"></p>
+          <p th:if="${error}" th:text="${error}"></p>
+      </div>
     <div>
       <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Asperiores mollitia assumenda ullam est quae maxime
         laudantium cum ab sit vero?</p>
