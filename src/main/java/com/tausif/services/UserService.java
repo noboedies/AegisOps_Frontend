@@ -1,6 +1,7 @@
 package com.tausif.services;
 
 import com.tausif.beans.User;
+import com.tausif.dto.UserLoginDto;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpMethod;
@@ -20,6 +21,15 @@ public class UserService {
         String api="/user/register";
         HttpEntity<User> requestEntity = new HttpEntity<User>(user);
         ResponseEntity<User> u = restTemplate.exchange(url+api, HttpMethod.POST, requestEntity, User.class);
+        return u.getBody();
+    }
+
+
+
+    public User checkLogin(UserLoginDto userLoginDto) {
+        String api = "/user/login";
+        HttpEntity<User> reEntity = new HttpEntity<User>(userLoginDto);
+        ResponseEntity<User> u = restTemplate.exchange(url+api, HttpMethod.POST, reEntity, User.class);
         return u.getBody();
     }
 }
