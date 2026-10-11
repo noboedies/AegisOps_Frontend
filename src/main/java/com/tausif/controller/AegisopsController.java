@@ -1,5 +1,6 @@
 package com.tausif.controller;
 
+import com.tausif.beans.User;
 import com.tausif.services.UserService;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,11 +29,13 @@ public class AegisopsController {
     public String login(){
         return "login";
     }
+
     @GetMapping("/user-dashboard")
     public String userDashboard(HttpSession session, RedirectAttributes ra){
-        if(session == null){
-            ra.addFlashAttribute("error", "Please login first");
-            return "redirerct:/login";
+        User user = (User)session.getAttribute("user");
+        if(user == null){
+            ra.addFlashAttribute("error", "please login first");
+            return "redirect:/login";
         }else{
             return "user-dashboard";
         }
