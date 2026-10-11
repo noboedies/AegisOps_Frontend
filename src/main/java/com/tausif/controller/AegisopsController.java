@@ -30,14 +30,5 @@ public class AegisopsController {
         return "login";
     }
 
-    @GetMapping("/user-dashboard")
-    public String userDashboard(HttpSession session, RedirectAttributes ra){
-        User user = (User)session.getAttribute("user");
-        if(user == null){
-            ra.addFlashAttribute("error", "please login first");
-            return "redirect:/login";
-        }else{
-            return "user-dashboard";
-        }
-    }
+
 }

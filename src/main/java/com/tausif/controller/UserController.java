@@ -36,8 +36,18 @@ public class UserController {
             return "redirect:/login";
         }else{
             session.setAttribute("user", u);
-//            ra.addFlashAttribute("user", u);
-            return "redirect:/user-dashboard";
+            return "redirect:/user/user-dashboard";
+        }
+    }
+
+    @GetMapping("/user-dashboard")
+    public String userDashboard(HttpSession session, RedirectAttributes ra){
+        User user = (User)session.getAttribute("user");
+        if(user == null){
+            ra.addFlashAttribute("error", "please login first");
+            return "redirect:/login";
+        }else{
+            return "user-dashboard";
         }
     }
 

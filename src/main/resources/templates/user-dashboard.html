@@ -9,10 +9,13 @@
   <header>
     <nav>
       <a href="/">AegisOps</a> &nbsp;
-      <a href="user-dahsboard">Home</a> &nbsp;
+      <a href="user-dashboard">Home</a> &nbsp;
       <a href="logout">logout</a> &nbsp;
       <span th:if="${session.user != null}" th:text="${session.user.name}"></span>
     </nav>
   </header>
+  <div>
+    <a href="addmanager">Add Manager</a> &nbsp;
+  </div>
 </body>
 </html>
