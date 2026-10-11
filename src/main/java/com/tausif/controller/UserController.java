@@ -36,8 +36,8 @@ public class UserController {
             return "redirect:/login";
         }else{
             session.setAttribute("user", u);
-            ra.addFlashAttribute("user", u);
-            return "redirect:/dashboard";
+//            ra.addFlashAttribute("user", u);
+            return "redirect:/user-dashboard";
         }
     }
 

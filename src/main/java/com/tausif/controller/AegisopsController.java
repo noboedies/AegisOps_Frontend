@@ -1,10 +1,12 @@
 package com.tausif.controller;
 
 import com.tausif.services.UserService;
+import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @Controller
 public class AegisopsController {
@@ -25,5 +27,14 @@ public class AegisopsController {
     @GetMapping("/login")
     public String login(){
         return "login";
+    }
+    @GetMapping("/user-dashboard")
+    public String userDashboard(HttpSession session, RedirectAttributes ra){
+        if(session == null){
+            ra.addFlashAttribute("error", "Please login first");
+            return "redirerct:/login";
+        }else{
+            return "user-dashboard";
+        }
     }
 }
