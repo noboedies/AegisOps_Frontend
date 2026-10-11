@@ -34,20 +34,22 @@ public class UserController {
         if(u == null){
             ra.addFlashAttribute("error", "incorrect username or password");
             return "redirect:/login";
-        }else{
-            session.setAttribute("user", u);
-            return "redirect:/user/user-dashboard";
         }
+        session.setAttribute("user", u);
+        return "redirect:/user-dashboard";
+
     }
 
-    @GetMapping("/user-dashboard")
-    public String userDashboard(HttpSession session, RedirectAttributes ra){
-        User user = (User)session.getAttribute("user");
+
+
+    @GetMapping("/addmanager")
+    public String addPm(HttpSession session, RedirectAttributes ra){
+        User user = (User) session.getAttribute("user");
         if(user == null){
-            ra.addFlashAttribute("error", "please login first");
-            return "redirect:/login";
+            ra.addFlashAttribute("error", "Please login first");
+            return "login";
         }else{
-            return "user-dashboard";
+            return "addmanager";
         }
     }
 

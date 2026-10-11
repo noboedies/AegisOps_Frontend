@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,7 +9,7 @@
   <header>
     <nav>
       <a href="/">AegisOps</a> &nbsp;
-      <a href="user-dahsboard">Home</a> &nbsp;
+      <a href="user/user-dahsboard">Home</a> &nbsp;
       <a href="logout">logout</a> &nbsp;
       <span th:if="${session.user != null}" th:text="${session.user.name}"></span>
     </nav>
@@ -18,7 +18,7 @@
     <hr>
     <h2>Add Manager</h2>
     <hr>
-    <form action="addpm" method="post">
+    <form action="user/addpm" method="post">
       <input type="text" name="name" placeholder="Enter Manager Name" required><br><br>
       <input type="text" name="username" placeholder="Enter Manager Username" required><br><br>
       <input type="email" name="email" placeholder="Enter Manager Email" required><br><br>
