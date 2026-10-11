@@ -2,12 +2,17 @@ package com.tausif.services;
 
 import com.tausif.beans.User;
 import com.tausif.dto.UserLoginDto;
+import com.tausif.dto.UserResDto;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.http.HttpEntity;
-import org.springframework.http.HttpMethod;
-import org.springframework.http.ResponseEntity;
+import org.springframework.http.*;
 import org.springframework.stereotype.Service;
+import org.springframework.util.LinkedMultiValueMap;
+import org.springframework.util.MultiValueMap;
 import org.springframework.web.client.RestTemplate;
+import org.springframework.web.util.UriComponentsBuilder;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Service
 public class UserService {
@@ -24,12 +29,15 @@ public class UserService {
         return u.getBody();
     }
 
-
-
-    public User checkLogin(UserLoginDto userLoginDto) {
+    public User checkLogin(String username, String password) {
         String api = "/user/login";
-        HttpEntity<User> reEntity = new HttpEntity<User>(userLoginDto);
-        ResponseEntity<User> u = restTemplate.exchange(url+api, HttpMethod.POST, reEntity, User.class);
-        return u.getBody();
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_FORM_URLENCODED);
+        MultiValueMap<String, String> body = new LinkedMultiValueMap<>();
+        body.add("username", username);
+        body.add("password", password);
+        HttpEntity<MultiValueMap<String, String>> request = new HttpEntity<>(body, headers);
+        ResponseEntity<User> res = restTemplate.exchange(url+api, HttpMethod.POST, request, User.class);
+        return res.getBody();
     }
 }

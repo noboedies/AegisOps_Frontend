@@ -29,8 +29,16 @@ public class UserController {
     }
 
     @PostMapping("/login")
-    public String checkLogin(@ModelAttribute UserLoginDto userLoginDto, HttpSession session, RedirectAttributes rs){
-        User u = userService.checkLogin(userLoginDto);
+    public String checkLogin(@RequestParam String username,@RequestParam String password, HttpSession session, RedirectAttributes ra){
+        User u = userService.checkLogin(username, password);
+        if(u == null){
+            ra.addFlashAttribute("error", "incorrect username or password");
+            return "redirect:/login";
+        }else{
+            session.setAttribute("user", u);
+            ra.addFlashAttribute("user", u);
+            return "redirect:/dashboard";
+        }
     }
 
 }
