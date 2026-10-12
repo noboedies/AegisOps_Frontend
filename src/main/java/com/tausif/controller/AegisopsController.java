@@ -40,4 +40,28 @@ public class AegisopsController {
         return "user-dashboard";
 
     }
+    @GetMapping("/addmanager")
+    public String addManager(HttpSession session, RedirectAttributes ra){
+        User user = (User)session.getAttribute("user");
+        if(user == null){
+            ra.addFlashAttribute("error", "Please login first!");
+            return "redirect:/login";
+        }else{
+            return "addmanager";
+        }
+    }
+
+    @GetMapping("/logout")
+    public String logout(HttpSession session,
+                         RedirectAttributes ra)
+    {
+        User user = (User) session.getAttribute("user");
+        if(user != null){
+            session.invalidate();
+            return "redirect:/login";
+        }else{
+            ra.addFlashAttribute("error", "Please login first");
+            return "redirect:/login";
+        }
+    }
 }

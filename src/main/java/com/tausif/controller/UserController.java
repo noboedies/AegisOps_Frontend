@@ -1,5 +1,6 @@
 package com.tausif.controller;
 
+import com.tausif.beans.ProjectManager;
 import com.tausif.beans.User;
 import com.tausif.dto.UserLoginDto;
 import com.tausif.services.UserService;
@@ -40,17 +41,8 @@ public class UserController {
 
     }
 
-
-
-    @GetMapping("/addmanager")
-    public String addPm(HttpSession session, RedirectAttributes ra){
-        User user = (User) session.getAttribute("user");
-        if(user == null){
-            ra.addFlashAttribute("error", "Please login first");
-            return "login";
-        }else{
-            return "addmanager";
-        }
+    @PostMapping("/addpm")
+    public String addPm(@ModelAttribute ProjectManager pm, RedirectAttributes ra){
+        ProjectManager projectManager = userService.registerPm(pm);
     }
-
 }

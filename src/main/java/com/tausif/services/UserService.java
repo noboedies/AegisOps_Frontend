@@ -1,5 +1,6 @@
 package com.tausif.services;
 
+import com.tausif.beans.ProjectManager;
 import com.tausif.beans.User;
 import com.tausif.dto.UserLoginDto;
 import com.tausif.dto.UserResDto;
@@ -39,5 +40,9 @@ public class UserService {
         HttpEntity<MultiValueMap<String, String>> request = new HttpEntity<>(body, headers);
         ResponseEntity<User> res = restTemplate.exchange(url+api, HttpMethod.POST, request, User.class);
         return res.getBody();
+    }
+
+    public ProjectManager registerPm(ProjectManager pm) {
+        return null;
     }
 }
