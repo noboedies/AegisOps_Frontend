@@ -44,5 +44,12 @@ public class UserController {
     @PostMapping("/addpm")
     public String addPm(@ModelAttribute ProjectManager pm, RedirectAttributes ra){
         ProjectManager projectManager = userService.registerPm(pm);
+        if(projectManager == null) {
+            ra.addFlashAttribute("error", "account already exist!");
+            return "redirect:/login";
+        }else{
+            ra.addFlashAttribute("success", "account created successfully!");
+            return "redireect:/addmanager";
+        }
     }
 }

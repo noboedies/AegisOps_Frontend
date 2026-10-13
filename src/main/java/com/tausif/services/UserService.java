@@ -43,6 +43,9 @@ public class UserService {
     }
 
     public ProjectManager registerPm(ProjectManager pm) {
-        return null;
+        String api = "/user/addPm";
+        HttpEntity<ProjectManager> entity = new HttpEntity<>(pm);
+        ResponseEntity<ProjectManager> res = restTemplate.exchange(url+api, HttpMethod.POST, entity, ProjectManager.class);
+        return res.getBody();
     }
 }
