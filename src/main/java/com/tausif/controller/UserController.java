@@ -49,7 +49,7 @@ public class UserController {
             return "redirect:/login";
         }else{
             ra.addFlashAttribute("success", "account created successfully!");
-            return "redireect:/addmanager";
+            return "redirect:/addmanager";
         }
     }
 }

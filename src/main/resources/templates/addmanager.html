@@ -17,6 +17,8 @@
   <section>
     <hr>
     <h2>Add Manager</h2>
+      <span th:if="${error}" th:text="${error}"></span><br><br>
+      <span th:if="${success}" th:text="${success}"></span>
     <hr>
     <form action="user/addpm" method="post">
       <input type="text" name="name" placeholder="Enter Manager Name" required><br><br>
