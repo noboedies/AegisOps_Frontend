@@ -24,6 +24,7 @@
       <input type="text" name="name" placeholder="Enter Manager Name" required><br><br>
       <input type="text" name="username" placeholder="Enter Manager Username" required><br><br>
       <input type="email" name="email" placeholder="Enter Manager Email" required><br><br>
+      <input type="email" th:value="${session.user.email}" name="userEmail" placeholder="Enter Manager Email" required readonly><br><br>
       <input type="tel" name="phone" placeholder="Enter Manager Phone" required><br><br>
       <input type="text" name="empId" placeholder="Enter Manager Employee ID" required><br><br>
       <input type="password" name="password" placeholder="Enter Manager Password" required><br><br>
