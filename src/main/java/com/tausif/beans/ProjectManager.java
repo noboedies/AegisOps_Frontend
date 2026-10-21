@@ -13,6 +13,7 @@ public class ProjectManager {
     private String name;
     private String username;
     private String email;
+    private String userEmail;
     private String phone;
     private String password;
     private String empId;
