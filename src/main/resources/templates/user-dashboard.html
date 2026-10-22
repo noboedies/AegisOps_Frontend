@@ -17,8 +17,8 @@
     </nav>
   </header>
   <div>
-    <a href="user/addmanager">Add Manager</a> &nbsp;
-    <form action="viewmanagers" method="post">
+    <a href="addmanager">Add Manager</a> &nbsp;
+    <form action="user/viewmanagers" method="post">
       <input type="hidden" name="useremail" th:value="${session.user.email}">
       <button>View Managers</button>
     </form>

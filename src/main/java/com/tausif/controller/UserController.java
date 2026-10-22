@@ -10,6 +10,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import java.util.List;
+
 @Controller
 @RequestMapping("/user")
 public class UserController {
@@ -51,5 +53,10 @@ public class UserController {
             ra.addFlashAttribute("success", "account created successfully!");
             return "redirect:/addmanager";
         }
+    }
+
+    @PostMapping("/viewmanagers")
+    public String viewManagers(@RequestParam String email, RedirectAttributes ra){
+        List<ProjectManager> projectManagers = userService.getAllManagers(email);
     }
 }

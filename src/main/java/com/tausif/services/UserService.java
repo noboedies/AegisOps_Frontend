@@ -5,6 +5,7 @@ import com.tausif.beans.User;
 import com.tausif.dto.UserLoginDto;
 import com.tausif.dto.UserResDto;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.*;
 import org.springframework.stereotype.Service;
 import org.springframework.util.LinkedMultiValueMap;
@@ -47,5 +48,11 @@ public class UserService {
         HttpEntity<ProjectManager> entity = new HttpEntity<>(pm);
         ResponseEntity<ProjectManager> res = restTemplate.exchange(url+api, HttpMethod.POST, entity, ProjectManager.class);
         return res.getBody();
+    }
+
+    public List<ProjectManager> getAllManagers(String email) {
+        String api = "user/getAllManagers/"+email;
+        ResponseEntity<List<ProjectManager>> response = restTemplate.exchange(url+api, HttpMethod.GET, null, new ParameterizedTypeReference<List<ProjectManager>>() {});
+        return response.getBody();
     }
 }
