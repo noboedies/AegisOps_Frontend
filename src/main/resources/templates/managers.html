@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <header>
+    <nav>
+      <a href="/">AegisOps</a> &nbsp;
+      <a href="user-dashboard">Home</a> &nbsp;
+      <a href="logout">logout</a> &nbsp;
+      <span th:text="${session.user.name}"></span>
+    </nav>
+  </header>
+  <section>
+    <table>
+      <thead>
+        <tr>
+          <th>Manager Name</th>
+          <th>Manager Email</th>
+          <th>Manager Phone</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr th:each="manager : ${managers}">
+          <td th:text="${manager.name}"></td>
+          <td th:text="${manager.email}"></td>
+          <td th:text="${manager.phone}"></td>
+            <td th:text="${manager.empId}"></td>
+        </tr>
+      </tbody>
+    </table>
+  </section>
+</body>
+
+</html>

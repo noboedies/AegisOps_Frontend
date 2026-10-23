@@ -55,10 +55,21 @@ public class UserController {
         }
     }
 
+    @GetMapping("/managers")
+    public String managers(HttpSession session, RedirectAttributes ra){
+        User u = (User)session.getAttribute("user");
+        if(u == null){
+            ra.addFlashAttribute("error", "please login first!");
+            return "redirect:/login";
+        }else{
+            return "managers";
+        }
+    }
+
     @PostMapping("/viewmanagers")
     public String viewManagers(@RequestParam String email, RedirectAttributes ra){
         List<ProjectManager> projectManagers = userService.getAllManagers(email);
         ra.addFlashAttribute("managers", projectManagers);
-        return "redirect:/user/manager";
+        return "redirect:/user/managers";
     }
 }
