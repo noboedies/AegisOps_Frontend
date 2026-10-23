@@ -58,5 +58,7 @@ public class UserController {
     @PostMapping("/viewmanagers")
     public String viewManagers(@RequestParam String email, RedirectAttributes ra){
         List<ProjectManager> projectManagers = userService.getAllManagers(email);
+        ra.addFlashAttribute("managers", projectManagers);
+        return "redirect:/user/manager";
     }
 }
