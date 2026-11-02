@@ -18,10 +18,8 @@
   </header>
   <div>
     <a href="addmanager">Add Manager</a> &nbsp;
-    <form action="user/viewmanagers" method="post">
-      <input type="hidden" name="useremail" th:value="${session.user.email}">
-      <button>View Managers</button>
-    </form>
+    <br>
+      <a th:href="@{user/viewmanagers/{email}(email=${session.user.email})}">View managers</a>
   </div>
 </body>
 

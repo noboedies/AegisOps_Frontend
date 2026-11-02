@@ -17,7 +17,6 @@ public class User {
     private String organization;
     private String status;
     private String password;
-//    @Column(nullable = true, columnDefinition = "longblob")
-//    private byte[] profile;
+    private byte[] profile;
 
 }

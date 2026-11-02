@@ -10,9 +10,9 @@
 <body>
   <header>
     <nav>
-      <a href="/">AegisOps</a> &nbsp;
-      <a href="user-dashboard">Home</a> &nbsp;
-      <a href="logout">logout</a> &nbsp;
+      <a th:href="@{/}">AegisOps</a> &nbsp;
+      <a th:href="@{/user-dashboard}">Home</a> &nbsp;
+      <a th:href="@{/logout}">logout</a> &nbsp;
       <span th:text="${session.user.name}"></span>
     </nav>
   </header>

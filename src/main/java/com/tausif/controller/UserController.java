@@ -8,8 +8,10 @@ import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import java.io.IOException;
 import java.util.List;
 
 @Controller
@@ -44,7 +46,8 @@ public class UserController {
     }
 
     @PostMapping("/addpm")
-    public String addPm(@ModelAttribute ProjectManager pm, RedirectAttributes ra){
+    public String addPm(@ModelAttribute ProjectManager pm, @RequestPart MultipartFile profilePic, RedirectAttributes ra) throws IOException {
+        pm.setProfile(profilePic.getBytes());
         ProjectManager projectManager = userService.registerPm(pm);
         if(projectManager == null) {
             ra.addFlashAttribute("error", "account already exist!");
@@ -66,8 +69,13 @@ public class UserController {
         }
     }
 
-    @PostMapping("/viewmanagers")
-    public String viewManagers(@RequestParam String email, RedirectAttributes ra){
+    @GetMapping("/viewmanagers/{email}")
+    public String viewManagers(@PathVariable String email, RedirectAttributes ra, HttpSession session){
+        User u = (User)session.getAttribute("user");
+        if(u == null){
+            ra.addFlashAttribute("error", "please login first!");
+            return "redirect:/login";
+        }
         List<ProjectManager> projectManagers = userService.getAllManagers(email);
         ra.addFlashAttribute("managers", projectManagers);
         return "redirect:/user/managers";

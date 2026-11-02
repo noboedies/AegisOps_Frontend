@@ -51,7 +51,7 @@ public class UserService {
     }
 
     public List<ProjectManager> getAllManagers(String email) {
-        String api = "user/getAllManagers/"+email;
+        String api = "/user/getAllManagers/"+email;
         ResponseEntity<List<ProjectManager>> response = restTemplate.exchange(url+api, HttpMethod.GET, null, new ParameterizedTypeReference<List<ProjectManager>>() {});
         return response.getBody();
     }

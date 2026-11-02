@@ -18,7 +18,7 @@ public class ProjectManager {
     private String password;
     private String empId;
     private String status;
-//    private byte[] profile;
+    private byte[] profile;
 //    private byte[] idCard;
 
 }
