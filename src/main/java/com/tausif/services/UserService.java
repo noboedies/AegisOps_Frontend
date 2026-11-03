@@ -39,20 +39,29 @@ public class UserService {
         body.add("username", username);
         body.add("password", password);
         HttpEntity<MultiValueMap<String, String>> request = new HttpEntity<>(body, headers);
-        ResponseEntity<User> res = restTemplate.exchange(url+api, HttpMethod.POST, request, User.class);
+        ResponseEntity<User> res = restTemplate.exchange(url+api,
+                HttpMethod.POST,
+                request,
+                User.class);
         return res.getBody();
     }
 
     public ProjectManager registerPm(ProjectManager pm) {
         String api = "/user/addPm";
         HttpEntity<ProjectManager> entity = new HttpEntity<>(pm);
-        ResponseEntity<ProjectManager> res = restTemplate.exchange(url+api, HttpMethod.POST, entity, ProjectManager.class);
+        ResponseEntity<ProjectManager> res = restTemplate.exchange(url+api,
+                HttpMethod.POST,
+                entity,
+                ProjectManager.class);
         return res.getBody();
     }
 
     public List<ProjectManager> getAllManagers(String email) {
         String api = "/user/getAllManagers/"+email;
-        ResponseEntity<List<ProjectManager>> response = restTemplate.exchange(url+api, HttpMethod.GET, null, new ParameterizedTypeReference<List<ProjectManager>>() {});
+        ResponseEntity<List<ProjectManager>> response = restTemplate.exchange(url+api,
+                HttpMethod.GET,
+                null,
+                new ParameterizedTypeReference<List<ProjectManager>>() {});
         return response.getBody();
     }
 }
