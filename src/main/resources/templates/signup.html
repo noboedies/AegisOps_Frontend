@@ -15,7 +15,7 @@
   </header>
   <section>
     <div>
-      <form th:action="@{/user/register}" method="post">
+      <form th:action="@{/user/register}" method="post" enctype="multipart/form-data">
         <input type="email" name="email" placeholder="Email" required><br><br>
         <input type="text" name="username" placeholder="Username" required><br><br>
         <input type="text" name="name" placeholder="Full name ex: John Doe" required><br><br>

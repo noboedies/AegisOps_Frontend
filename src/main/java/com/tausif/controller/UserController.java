@@ -22,7 +22,8 @@ public class UserController {
     private UserService userService;
 
     @PostMapping("/register")
-    public String register(@ModelAttribute User user, RedirectAttributes ra){
+    public String register(@ModelAttribute User user, RedirectAttributes ra, @RequestPart(required = false) MultipartFile profilePic) throws IOException {
+        user.setProfile(profilePic.getBytes());
         User u = userService.register(user);
         if(u != null){
             ra.addFlashAttribute("success", "user registered successfully!");
