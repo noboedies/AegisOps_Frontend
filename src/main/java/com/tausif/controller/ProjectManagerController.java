@@ -40,4 +40,14 @@ public class ProjectManagerController {
             return "redirect:/login";
         }
     }
+
+    @GetMapping("/addTl")
+    public String addTeamLead(HttpSession session, RedirectAttributes ra){
+        ProjectManager pm = (ProjectManager) session.getAttribute("pm");
+        if(pm == null){
+            ra.addFlashAttribute("error", "entry denied Please Login First!");
+            return "redirect:/login";
+        }
+        return "manager/addteamlead";
+    }
 }
