@@ -66,5 +66,12 @@ public class ProjectManagerController {
         teamLead.setProfile(profilePic.getBytes());
         teamLead.setIdCard(id.getBytes());
         TeamLead tl = pmService.registerTl(teamLead);
+        if(tl == null){
+            ra.addFlashAttribute("error", "Account already exist!");
+            return "redirect:/pm/addTl";
+        }else{
+            ra.addFlashAttribute("success", "Team Lead Account created Successfully!");
+            return "redirect:/pm/addTl";
+        }
     }
 }
