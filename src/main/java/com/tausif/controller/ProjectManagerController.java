@@ -1,15 +1,16 @@
 package com.tausif.controller;
 
 import com.tausif.beans.ProjectManager;
+import com.tausif.beans.TeamLead;
 import com.tausif.services.ProjectManagerService;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
+import java.io.IOException;
 
 @Controller
 @RequestMapping("/pm")
@@ -49,5 +50,21 @@ public class ProjectManagerController {
             return "redirect:/login";
         }
         return "manager/addteamlead";
+    }
+
+    @PostMapping("/registerTl")
+    public String registerTl(@ModelAttribute TeamLead teamLead,
+                             @RequestPart(required = false)MultipartFile profilePic,
+                             @RequestPart(required = false) MultipartFile id,
+                             RedirectAttributes ra,
+                             HttpSession session) throws IOException {
+        ProjectManager pm = (ProjectManager) session.getAttribute("pm");
+        if(pm == null){
+            ra.addFlashAttribute("error", "Please login first!");
+            return "redirect:/login";
+        }
+        teamLead.setProfile(profilePic.getBytes());
+        teamLead.setIdCard(id.getBytes());
+        TeamLead tl = pmService.registerTl(teamLead);
     }
 }

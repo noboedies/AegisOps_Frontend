@@ -21,17 +21,19 @@
     <br>
   </div>
   <section>
-    form th:action="@{/pm/addTl}" method="post">
-      <label for="name">Name:</label>
-      <input type="text" id="name" name="name" required><br><br>
-
-      <label for="email">Email:</label>
-      <input type="email" id="email" name="email" required><br><br>
-
-      <label for="password">Password:</label>
-      <input type="password" id="password" name="password" required><br><br>
-
+    <form th:action="@{/pm/registerTl}" method="post" enctype="multipart/form-data">
+      <input type="text" name="name" placeholder="Enter Team Lead Name" required><br><br>
+      <input type="text" name="username" placeholder="Enter Team Lead Username" required><br><br>
+      <input type="email" name="email" placeholder="Enter Team Lead Email" required><br><br>
+      <input type="email" th:value="${session.pm.userEmail}" name="userEmail" placeholder="Enter Admin Email" required readonly><br><br>
+      <input type="email" th:value="${session.pm.email}" name="pmEmail" placeholder="Enter Manager Email" required readonly><br><br>
+      <input type="tel" name="phone" placeholder="Enter Team Lead Phone" required><br><br>
+      <input type="file" name="profilePic" accept="image/*" placeholder="Upload Profile Picture" required><br><br>
+      <input type="file" name="id" accept="image/**" placeholder="Upload ID Proof" required><br><br>
+      <input type="text" name="empId" placeholder="Enter Team Lead Employee ID" required><br><br>
+      <input type="password" name="password" placeholder="Enter Password" required><br><br>
       <button type="submit">Add Team Lead</button>
+    </form>
   </section>
 </body>
 

@@ -1,6 +1,7 @@
 package com.tausif.services;
 
 import com.tausif.beans.ProjectManager;
+import com.tausif.beans.TeamLead;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.*;
 import org.springframework.stereotype.Service;
@@ -26,5 +27,12 @@ public class ProjectManagerService {
         HttpEntity<MultiValueMap<String, String>> request = new HttpEntity<>(map, headers);
         ResponseEntity<ProjectManager> res = restTemplate.exchange(url+api, HttpMethod.POST, request, ProjectManager.class);
         return res.getBody();
+    }
+
+    public TeamLead registerTl(TeamLead teamLead) {
+        String api = "/pm/registerTl";
+        HttpEntity<TeamLead> httpEntity = new HttpEntity<>(teamLead);
+        ResponseEntity<TeamLead> response = restTemplate.exchange(url+api, HttpMethod.POST, httpEntity, TeamLead.class);
+        return response.getBody();
     }
 }
