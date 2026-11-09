@@ -5,8 +5,8 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Document</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.3/css/bootstrap.min.css">
 </head>
-
 <body>
   <header>
     <nav>
@@ -19,14 +19,18 @@
   <div>
    <a th:href="@{/pm/addTl}">Add Team Lead</a> &nbsp;
     <br>
+    <h5>
+      <span class="text-white bg-danger px-4" th:if="${error}" th:text="${error}">hii</span>
+      <span class="text-white bg-success px-4" th:if="${success}" th:text="${success}">hii</span>
+    </h5>
   </div>
-  <section>
+  <section class="d-flex justify-content-center align-items-center" style="height: 300px;">
     <form th:action="@{/pm/registerTl}" method="post" enctype="multipart/form-data">
       <input type="text" name="name" placeholder="Enter Team Lead Name" required><br><br>
       <input type="text" name="username" placeholder="Enter Team Lead Username" required><br><br>
-      <input type="email" name="email" placeholder="Enter Team Lead Email" required><br><br>
-      <input type="email" th:value="${session.pm.userEmail}" name="userEmail" placeholder="Enter Admin Email" required readonly><br><br>
-      <input type="email" th:value="${session.pm.email}" name="pmEmail" placeholder="Enter Manager Email" required readonly><br><br>
+      <input type="email" name="email" placeholder="Enter Team Lead Email" required>
+      <input type="hidden" th:value="${session.pm.userEmail}" name="userEmail" placeholder="Enter Admin Email" required readonly>
+      <input type="hidden" th:value="${session.pm.email}" name="pmEmail" placeholder="Enter Manager Email" required readonly><br><br>
       <input type="tel" name="phone" placeholder="Enter Team Lead Phone" required><br><br>
       <input type="file" name="profilePic" accept="image/*" placeholder="Upload Profile Picture" required><br><br>
       <input type="file" name="id" accept="image/**" placeholder="Upload ID Proof" required><br><br>
@@ -36,5 +40,5 @@
     </form>
   </section>
 </body>
-
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.3/js/bootstrap.bundle.min.js"></script>
 </html>
