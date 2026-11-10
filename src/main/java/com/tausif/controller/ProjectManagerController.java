@@ -11,6 +11,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.io.IOException;
+import java.util.List;
 
 @Controller
 @RequestMapping("/pm")
@@ -73,5 +74,16 @@ public class ProjectManagerController {
             ra.addFlashAttribute("success", "Team Lead Account created Successfully!");
             return "redirect:/pm/addTl";
         }
+    }
+
+    @GetMapping("/viewTeamLead/{email}")
+    public String viewTeamLead(@PathVariable String email, HttpSession session, RedirectAttributes ra){
+        ProjectManager pm = (ProjectManager) session.getAttribute("pm");
+        if(pm == null){
+            ra.addFlashAttribute("error", "Please login first!");
+            return "redirect:/login";
+        }
+        List<TeamLead> teamLeads = pmService.getAllTeamLeadByPmEmail(email);
+        return "";
     }
 }

@@ -3,11 +3,14 @@ package com.tausif.services;
 import com.tausif.beans.ProjectManager;
 import com.tausif.beans.TeamLead;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.*;
 import org.springframework.stereotype.Service;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
 import org.springframework.web.client.RestTemplate;
+
+import java.util.List;
 
 @Service
 public class ProjectManagerService {
@@ -34,5 +37,13 @@ public class ProjectManagerService {
         HttpEntity<TeamLead> httpEntity = new HttpEntity<>(teamLead);
         ResponseEntity<TeamLead> response = restTemplate.exchange(url+api, HttpMethod.POST, httpEntity, TeamLead.class);
         return response.getBody();
+    }
+
+    public List<TeamLead> getAllTeamLeadByPmEmail(String email) {
+        String api = "/pm/findAllByPmEmail/"+email;
+        ResponseEntity<List<TeamLead>> teamLeads = restTemplate.exchange(url+api, HttpMethod.GET,
+                null,
+                new ParameterizedTypeReference<List<TeamLead>>() {});
+        return teamLeads.getBody();
     }
 }
