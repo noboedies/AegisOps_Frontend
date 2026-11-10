@@ -6,6 +6,7 @@ import com.tausif.services.ProjectManagerService;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
@@ -77,13 +78,17 @@ public class ProjectManagerController {
     }
 
     @GetMapping("/viewTeamLead/{email}")
-    public String viewTeamLead(@PathVariable String email, HttpSession session, RedirectAttributes ra){
+    public String viewTeamLead(@PathVariable String email,
+                               HttpSession session,
+                               RedirectAttributes ra,
+                               Model m){
         ProjectManager pm = (ProjectManager) session.getAttribute("pm");
         if(pm == null){
             ra.addFlashAttribute("error", "Please login first!");
             return "redirect:/login";
         }
         List<TeamLead> teamLeads = pmService.getAllTeamLeadByPmEmail(email);
-        return "";
+        m.addAttribute("tls", teamLeads);
+        return "view-teamlead";
     }
 }

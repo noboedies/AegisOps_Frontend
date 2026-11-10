@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.3/css/bootstrap.min.css">
+</head>
+<body>
+  <header>
+    <nav>
+      <a th:href="@{/pm/manager-dashboard}">AegisOps</a> &nbsp;
+      <a th:href="@{/logout}">logout</a> &nbsp;
+      <span th:text="${session.pm.name}"></span>
+    </nav>
+  </header>
+  <section class="d-flex justify-content-center align-items-center" style="height: 300px;">
+    <table>
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Email</th>
+          <th>phone</th>
+          <th>Admin Email</th>
+          <th>Manager Email</th>
+          <th>View More</th>
+        </tr>
+      </thead>
+      <tbody th:if="${tls}">
+        <tr th:each="tl : ${tls}">
+          <td th:text="${tl.name}"></td>
+          <td th:text="${tl.email}"></td>
+          <td th:text="${tl.phone}"></td>
+          <td th:text="${tl.userEmail}"></td>
+          <td th:text="${tl.pmEmail}"></td>
+          <td><a th:href="@{/tl/email}(email=${tl.email})">View Details</a></td>
+        </tr>
+      </tbody>
+    </table>
+  </section>
+</body>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.3/js/bootstrap.bundle.min.js"></script>
+</html>
