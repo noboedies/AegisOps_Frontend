@@ -89,6 +89,6 @@ public class ProjectManagerController {
         }
         List<TeamLead> teamLeads = pmService.getAllTeamLeadByPmEmail(email);
         m.addAttribute("tls", teamLeads);
-        return "view-teamlead";
+        return "/manager/view-teamlead";
     }
 }
