@@ -46,4 +46,13 @@ public class ProjectManagerService {
                 new ParameterizedTypeReference<List<TeamLead>>() {});
         return teamLeads.getBody();
     }
+
+    public ProjectManager findByEmail(String email) {
+        String api = "/pm/findByEmail/"+email;
+        ResponseEntity<ProjectManager> pm = restTemplate.exchange(url+api,
+                HttpMethod.GET,
+                null,
+                ProjectManager.class);
+        return pm.getBody();
+    }
 }

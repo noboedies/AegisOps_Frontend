@@ -3,6 +3,7 @@ package com.tausif.controller;
 import com.tausif.beans.ProjectManager;
 import com.tausif.beans.TeamLead;
 import com.tausif.services.ProjectManagerService;
+import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -12,6 +13,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.io.IOException;
+import java.net.http.HttpResponse;
 import java.util.List;
 
 @Controller
@@ -90,5 +92,10 @@ public class ProjectManagerController {
         List<TeamLead> teamLeads = pmService.getAllTeamLeadByPmEmail(email);
         m.addAttribute("tls", teamLeads);
         return "/manager/view-teamlead";
+    }
+
+    @GetMapping("/pmProfile")
+    public void pmProfile(@RequestParam String email, HttpServletResponse response){
+        response.getOutputStream().write(pmService.findByEmail(email).get);
     }
 }
