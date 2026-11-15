@@ -95,7 +95,7 @@ public class ProjectManagerController {
     }
 
     @GetMapping("/pmProfile")
-    public void pmProfile(@RequestParam String email, HttpServletResponse response){
-        response.getOutputStream().write(pmService.findByEmail(email).get);
+    public void pmProfile(@RequestParam String email, HttpServletResponse response) throws IOException {
+        response.getOutputStream().write(pmService.findByEmail(email).getProfile());
     }
 }
