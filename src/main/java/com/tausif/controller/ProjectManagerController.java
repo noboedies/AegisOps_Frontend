@@ -98,4 +98,9 @@ public class ProjectManagerController {
     public void pmProfile(@RequestParam String email, HttpServletResponse response) throws IOException {
         response.getOutputStream().write(pmService.findByEmail(email).getProfile());
     }
+
+    @GetMapping("/pmId")
+    public void pmIdCard(@RequestParam String email, HttpServletResponse response) throws IOException {
+        response.getOutputStream().write(pmService.findByEmail(email).getIdCard());
+    }
 }
